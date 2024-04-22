@@ -121,11 +121,12 @@ public class Yatzy1Test {
                 Arguments.of(new DiceCombination(6, 5, 6, 6, 5), 18)
         );
     }
+
     @Test
-    public void one_pair() {
-        assertEquals(6, Yatzy1.score_pair(3, 4, 3, 5, 6));
-        assertEquals(10, Yatzy1.score_pair(5, 3, 3, 3, 5));
-        assertEquals(12, Yatzy1.score_pair(5, 3, 6, 6, 5));
+    public void shouldTestOnePair() {
+        assertEquals(6, new Yatzy1(new DiceCombination(3, 4, 3, 5, 6)).scorePair());
+        assertEquals(10, new Yatzy1(new DiceCombination(5, 3, 3, 3, 5)).scorePair());
+        assertEquals(12, new Yatzy1(new DiceCombination(5, 3, 6, 6, 5)).scorePair());
     }
 
     @Test

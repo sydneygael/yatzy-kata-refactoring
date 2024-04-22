@@ -2,6 +2,8 @@ package org.kata;
 
 import org.kata.model.DiceCombination;
 
+import java.util.Comparator;
+
 public class Yatzy1 {
 
     private final DiceCombination diceCombination;
@@ -43,18 +45,10 @@ public class Yatzy1 {
         return diceCombination.countDice(6) * 6;
     }
 
-    public static int score_pair(int d1, int d2, int d3, int d4, int d5) {
-        int[] counts = new int[6];
-        counts[d1 - 1]++;
-        counts[d2 - 1]++;
-        counts[d3 - 1]++;
-        counts[d4 - 1]++;
-        counts[d5 - 1]++;
-        int at;
-        for (at = 0; at != 6; at++)
-            if (counts[6 - at - 1] >= 2)
-                return (6 - at) * 2;
-        return 0;
+    public int scorePair() {
+       var result = diceCombination.numberOfDiceGreaterThan(2);
+       if (result.isEmpty()) { return 0; }
+       return result.get(0) * 2;
     }
 
     public static int two_pair(int d1, int d2, int d3, int d4, int d5) {

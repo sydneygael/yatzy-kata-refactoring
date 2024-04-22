@@ -1,5 +1,7 @@
 package org.kata.model;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -33,5 +35,13 @@ public record DiceCombination(int d1, int d2, int d3, int d4, int d5) {
 
     public int countDice(int dice) {
         return counts().getOrDefault(dice, 0L).intValue();
+    }
+
+    public List<Integer> numberOfDiceGreaterThan(int n) {
+        return counts().entrySet().stream()
+                .filter(entry -> entry.getValue() >= n)
+                .map(Map.Entry::getKey)
+                .sorted(Comparator.reverseOrder())
+                .toList();
     }
 }
