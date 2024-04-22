@@ -71,8 +71,8 @@ public record DiceCombination(int d1, int d2, int d3, int d4, int d5) {
 
     public boolean isFullHouse() {
         boolean hasThreeOfAKind = !numberOfDiceGreaterThan(3).isEmpty();
-        boolean isTwoOfKind = !findPairs().isEmpty();
-        boolean isNotYatzy = yatzy() == 0;
-        return hasThreeOfAKind && isTwoOfKind && isNotYatzy;
+        boolean hasTwoOfAKind = !findPairs().isEmpty();
+        boolean isNotYates = yatzy() == 0;
+        return hasThreeOfAKind && hasTwoOfAKind && isNotYates;
     }
 }
