@@ -44,4 +44,8 @@ public record DiceCombination(int d1, int d2, int d3, int d4, int d5) {
                 .sorted(Comparator.reverseOrder())
                 .toList();
     }
+
+    public List<Integer> findPairs() {
+        return numberOfDiceGreaterThan(2);
+    }
 }

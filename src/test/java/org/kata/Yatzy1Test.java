@@ -125,7 +125,7 @@ public class Yatzy1Test {
     @ParameterizedTest
     @MethodSource("shouldTestOnePairProvider")
     public void shouldTestOnePair(DiceCombination combination, int expectedScore) {
-        assertEquals(expectedScore, new Yatzy1(combination).scorePair());
+        assertEquals(expectedScore, new Yatzy1(combination).pairs());
     }
 
     public static Stream<Arguments> shouldTestOnePairProvider() {
@@ -136,10 +136,17 @@ public class Yatzy1Test {
         );
     }
 
-    @Test
-    public void two_Pair() {
-        assertEquals(16, Yatzy1.two_pair(3, 3, 5, 4, 5));
-        assertEquals(16, Yatzy1.two_pair(3, 3, 5, 5, 5));
+    @ParameterizedTest
+    @MethodSource
+    public void shouldTestTwoParis(DiceCombination combination, int expectedScore) {
+        assertEquals(expectedScore, new Yatzy1(combination).twoPairs());
+    }
+
+    public static Stream<Arguments> shouldTestTwoParis() {
+        return Stream.of(
+                Arguments.of(new DiceCombination(3, 3, 5, 4, 5),16),
+                Arguments.of(new DiceCombination(3, 3, 5, 5, 5),16)
+        );
     }
 
     @Test
