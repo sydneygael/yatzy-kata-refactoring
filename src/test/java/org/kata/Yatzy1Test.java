@@ -138,11 +138,12 @@ public class Yatzy1Test {
 
     @ParameterizedTest
     @MethodSource
-    public void shouldTestTwoParis(DiceCombination combination, int expectedScore) {
+    // pairs not paris :D
+    public void shouldTestTwoPairs(DiceCombination combination, int expectedScore) {
         assertEquals(expectedScore, new Yatzy1(combination).twoPairs());
     }
 
-    public static Stream<Arguments> shouldTestTwoParis() {
+    public static Stream<Arguments> shouldTestTwoPairs() {
         return Stream.of(
                 Arguments.of(new DiceCombination(3, 3, 5, 4, 5),16),
                 Arguments.of(new DiceCombination(3, 3, 5, 5, 5),16)
