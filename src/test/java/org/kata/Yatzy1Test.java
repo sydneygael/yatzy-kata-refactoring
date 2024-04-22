@@ -122,11 +122,18 @@ public class Yatzy1Test {
         );
     }
 
-    @Test
-    public void shouldTestOnePair() {
-        assertEquals(6, new Yatzy1(new DiceCombination(3, 4, 3, 5, 6)).scorePair());
-        assertEquals(10, new Yatzy1(new DiceCombination(5, 3, 3, 3, 5)).scorePair());
-        assertEquals(12, new Yatzy1(new DiceCombination(5, 3, 6, 6, 5)).scorePair());
+    @ParameterizedTest
+    @MethodSource("shouldTestOnePairProvider")
+    public void shouldTestOnePair(DiceCombination combination, int expectedScore) {
+        assertEquals(expectedScore, new Yatzy1(combination).scorePair());
+    }
+
+    public static Stream<Arguments> shouldTestOnePairProvider() {
+        return Stream.of(
+                Arguments.of(new DiceCombination(3, 4, 3, 5, 6), 6),
+                Arguments.of(new DiceCombination(5, 3, 3, 3, 5), 10),
+                Arguments.of(new DiceCombination(5, 3, 6, 6, 5), 12)
+        );
     }
 
     @Test
