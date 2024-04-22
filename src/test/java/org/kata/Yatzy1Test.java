@@ -1,7 +1,6 @@
 package org.kata;
 
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -206,9 +205,16 @@ public class Yatzy1Test {
         );
     }
 
-    @Test
-    public void fullHouse() {
-        assertEquals(18, Yatzy1.fullHouse(6, 2, 2, 2, 6));
-        assertEquals(0, Yatzy1.fullHouse(2, 3, 4, 5, 6));
+    @ParameterizedTest
+    @MethodSource
+    public void fullHouse(DiceCombination combination, int expectedScore) {
+        assertEquals(expectedScore, new Yatzy1(combination).fullHouse());
+    }
+
+    public static Stream<Arguments> fullHouse() {
+        return Stream.of(
+                Arguments.of(new DiceCombination(6, 2, 2, 2, 6), 18),
+                Arguments.of(new DiceCombination(2, 3, 4, 5, 6), 0)
+        );
     }
 }

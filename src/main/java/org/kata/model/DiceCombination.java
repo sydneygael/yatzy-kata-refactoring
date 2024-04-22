@@ -68,4 +68,11 @@ public record DiceCombination(int d1, int d2, int d3, int d4, int d5) {
         var distinctValues = getDistinctValues();
         return IntStream.rangeClosed(2, 6).allMatch(distinctValues::contains);
     }
+
+    public boolean isFullHouse() {
+        boolean hasThreeOfAKind = !numberOfDiceGreaterThan(3).isEmpty();
+        boolean isTwoOfKind = !findPairs().isEmpty();
+        boolean isNotYatzy = yatzy() == 0;
+        return hasThreeOfAKind && isTwoOfKind && isNotYatzy;
+    }
 }
