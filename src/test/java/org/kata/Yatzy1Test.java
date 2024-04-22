@@ -11,15 +11,15 @@ import org.kata.model.DiceCombination;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class Yatzy1Test {
 
+
     @ParameterizedTest
     @MethodSource("shouldTestChanceProvider")
     public void shouldTestChance(DiceCombination combination, int expectedScore) {
-        assertEquals(expectedScore, Yatzy1.chance(combination));
+        assertEquals(expectedScore, new Yatzy1(combination).chance());
     }
 
     private static Stream<Arguments> shouldTestChanceProvider() {
@@ -36,50 +36,91 @@ public class Yatzy1Test {
             "6, 6, 6, 6, 3, 0"
     })
     public void yatzyShouldReturnExpectedScore(int d1, int d2, int d3, int d4, int d5, int expectedScore) {
-        assertEquals(expectedScore, Yatzy1.yatzy(new DiceCombination(d1, d2, d3, d4, d5)));
+        assertEquals(expectedScore, new Yatzy1(new DiceCombination(d1, d2, d3, d4, d5)).yatzy());
     }
 
-    @Test
-    public void test_1s() {
-        assertTrue(Yatzy1.ones(1, 2, 3, 4, 5) == 1);
-        assertEquals(2, Yatzy1.ones(1, 2, 1, 4, 5));
-        assertEquals(0, Yatzy1.ones(6, 2, 2, 4, 5));
-        assertEquals(4, Yatzy1.ones(1, 2, 1, 1, 1));
+    @ParameterizedTest
+    @MethodSource("onesProvider")
+    public void shouldTestOnes(DiceCombination combination, int expectedScore) {
+        assertEquals(expectedScore, new Yatzy1(combination).ones());
     }
 
-    @Test
-    public void test_2s() {
-        assertEquals(4, Yatzy1.twos(1, 2, 3, 2, 6));
-        assertEquals(10, Yatzy1.twos(2, 2, 2, 2, 2));
+    public static Stream<Arguments> onesProvider() {
+        return Stream.of(
+                Arguments.of(new DiceCombination(1, 2, 3, 4, 5), 1),
+                Arguments.of(new DiceCombination(1, 2, 1, 4, 5), 2),
+                Arguments.of(new DiceCombination(6, 2, 2, 4, 5), 0),
+                Arguments.of(new DiceCombination(1, 2, 1, 1, 1), 4)
+        );
     }
 
-    @Test
-    public void test_threes() {
-        assertEquals(6, Yatzy1.threes(1, 2, 3, 2, 3));
-        assertEquals(12, Yatzy1.threes(2, 3, 3, 3, 3));
+    @ParameterizedTest
+    @MethodSource("shouldTestTwosProvider")
+    public void shouldTestTwos(DiceCombination combination, int expectedScore) {
+        assertEquals(expectedScore, new Yatzy1(combination).twos());
     }
 
-    @Test
-    public void fours_test() {
-        assertEquals(12, new Yatzy1(4, 4, 4, 5, 5).fours());
-        assertEquals(8, new Yatzy1(4, 4, 5, 5, 5).fours());
-        assertEquals(4, new Yatzy1(4, 5, 5, 5, 5).fours());
+    public static Stream<Arguments> shouldTestTwosProvider() {
+        return Stream.of(
+                Arguments.of(new DiceCombination(1, 2, 3, 2, 6), 4),
+                Arguments.of(new DiceCombination(2, 2, 2, 2, 2), 10)
+        );
     }
 
-    @Test
-    public void fives() {
-        assertEquals(10, new Yatzy1(4, 4, 4, 5, 5).fives());
-        assertEquals(15, new Yatzy1(4, 4, 5, 5, 5).fives());
-        assertEquals(20, new Yatzy1(4, 5, 5, 5, 5).fives());
+    @ParameterizedTest
+    @MethodSource("shouldTestThreesProvider")
+    public void shouldTestThrees(DiceCombination combination, int expectedScore) {
+        assertEquals(expectedScore, new Yatzy1(combination).threes());
     }
 
-    @Test
-    public void sixes_test() {
-        assertEquals(0, new Yatzy1(4, 4, 4, 5, 5).sixes());
-        assertEquals(6, new Yatzy1(4, 4, 6, 5, 5).sixes());
-        assertEquals(18, new Yatzy1(6, 5, 6, 6, 5).sixes());
+    public static Stream<Arguments> shouldTestThreesProvider() {
+        return Stream.of(
+                Arguments.of(new DiceCombination(1, 2, 3, 2, 3), 6),
+                Arguments.of(new DiceCombination(2, 3, 3, 3, 3), 12)
+        );
     }
 
+    @ParameterizedTest
+    @MethodSource("shouldTestFoursProvider")
+    public void shouldTestFours(DiceCombination combination, int expectedScore) {
+        assertEquals(expectedScore, new Yatzy1(combination).fours());
+    }
+
+    public static Stream<Arguments> shouldTestFoursProvider() {
+        return Stream.of(
+                Arguments.of(new DiceCombination(4, 4, 4, 5, 5), 12),
+                Arguments.of(new DiceCombination(4, 4, 5, 5, 5), 8),
+                Arguments.of(new DiceCombination(4, 5, 5, 5, 5), 4)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("shouldTestFivesProvider")
+    public void shouldTestFives(DiceCombination combination, int expectedScore) {
+        assertEquals(expectedScore, new Yatzy1(combination).fives());
+    }
+
+    public static Stream<Arguments> shouldTestFivesProvider() {
+        return Stream.of(
+                Arguments.of(new DiceCombination(4, 4, 4, 5, 5), 10),
+                Arguments.of(new DiceCombination(4, 4, 5, 5, 5), 15),
+                Arguments.of(new DiceCombination(4, 5, 5, 5, 5), 20)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("shouldTestSixesProvider")
+    public void shouldTestSixes(DiceCombination combination, int expectedScore) {
+        assertEquals(expectedScore, new Yatzy1(combination).sixes());
+    }
+
+    public static Stream<Arguments> shouldTestSixesProvider() {
+        return Stream.of(
+                Arguments.of(new DiceCombination(4, 4, 4, 5, 5), 0),
+                Arguments.of(new DiceCombination(4, 4, 6, 5, 5), 6),
+                Arguments.of(new DiceCombination(6, 5, 6, 6, 5), 18)
+        );
+    }
     @Test
     public void one_pair() {
         assertEquals(6, Yatzy1.score_pair(3, 4, 3, 5, 6));
