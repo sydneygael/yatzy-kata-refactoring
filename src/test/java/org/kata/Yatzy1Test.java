@@ -150,20 +150,32 @@ public class Yatzy1Test {
         );
     }
 
-    @Test
-    public void three_of_a_kind() {
-        assertEquals(9, Yatzy1.three_of_a_kind(3, 3, 3, 4, 5));
-        assertEquals(15, Yatzy1.three_of_a_kind(5, 3, 5, 4, 5));
-        assertEquals(9, Yatzy1.three_of_a_kind(3, 3, 3, 3, 5));
+    @ParameterizedTest
+    @MethodSource
+    public void shouldTestThreeOfAKind(DiceCombination combination, int expectedScore) {
+        assertEquals(expectedScore, new Yatzy1(combination).threeOfAKind());
     }
 
-    @Test
-    public void four_of_a_knd() {
-        assertEquals(12, Yatzy1.four_of_a_kind(3, 3, 3, 3, 5));
-        assertEquals(20, Yatzy1.four_of_a_kind(5, 5, 5, 4, 5));
-        assertEquals(9, Yatzy1.three_of_a_kind(3, 3, 3, 3, 3));
+    public static Stream<Arguments> shouldTestThreeOfAKind() {
+        return Stream.of(
+                Arguments.of(new DiceCombination(3, 3, 3, 4, 5),9),
+                Arguments.of(new DiceCombination(5, 3, 5, 4, 5),15),
+                Arguments.of(new DiceCombination(3, 3, 3, 3, 5),9),
+                Arguments.of(new DiceCombination(3, 3, 3, 3, 3),9)
+        );
     }
 
+    @ParameterizedTest
+    @MethodSource
+    public void shouldTestFourOfAKind(DiceCombination combination, int expectedScore) {
+        assertEquals(expectedScore, new Yatzy1(combination).fourOfAKind());
+    }
+    public static Stream<Arguments> shouldTestFourOfAKind() {
+        return Stream.of(
+                Arguments.of(new DiceCombination(3, 3, 3, 3, 5),12),
+                Arguments.of(new DiceCombination(5, 5, 5, 4, 5),20)
+        );
+    }
     @Test
     public void smallStraight() {
         assertEquals(15, Yatzy1.smallStraight(1, 2, 3, 4, 5));
