@@ -145,8 +145,8 @@ public class Yatzy1Test {
 
     public static Stream<Arguments> shouldTestTwoPairs() {
         return Stream.of(
-                Arguments.of(new DiceCombination(3, 3, 5, 4, 5),16),
-                Arguments.of(new DiceCombination(3, 3, 5, 5, 5),16)
+                Arguments.of(new DiceCombination(3, 3, 5, 4, 5), 16),
+                Arguments.of(new DiceCombination(3, 3, 5, 5, 5), 16)
         );
     }
 
@@ -158,10 +158,10 @@ public class Yatzy1Test {
 
     public static Stream<Arguments> shouldTestThreeOfAKind() {
         return Stream.of(
-                Arguments.of(new DiceCombination(3, 3, 3, 4, 5),9),
-                Arguments.of(new DiceCombination(5, 3, 5, 4, 5),15),
-                Arguments.of(new DiceCombination(3, 3, 3, 3, 5),9),
-                Arguments.of(new DiceCombination(3, 3, 3, 3, 3),9)
+                Arguments.of(new DiceCombination(3, 3, 3, 4, 5), 9),
+                Arguments.of(new DiceCombination(5, 3, 5, 4, 5), 15),
+                Arguments.of(new DiceCombination(3, 3, 3, 3, 5), 9),
+                Arguments.of(new DiceCombination(3, 3, 3, 3, 3), 9)
         );
     }
 
@@ -170,24 +170,33 @@ public class Yatzy1Test {
     public void shouldTestFourOfAKind(DiceCombination combination, int expectedScore) {
         assertEquals(expectedScore, new Yatzy1(combination).fourOfAKind());
     }
+
     public static Stream<Arguments> shouldTestFourOfAKind() {
         return Stream.of(
-                Arguments.of(new DiceCombination(3, 3, 3, 3, 5),12),
-                Arguments.of(new DiceCombination(5, 5, 5, 4, 5),20)
+                Arguments.of(new DiceCombination(3, 3, 3, 3, 5), 12),
+                Arguments.of(new DiceCombination(5, 5, 5, 4, 5), 20)
         );
     }
-    @Test
-    public void smallStraight() {
-        assertEquals(15, Yatzy1.smallStraight(1, 2, 3, 4, 5));
-        assertEquals(15, Yatzy1.smallStraight(2, 3, 4, 5, 1));
-        assertEquals(0, Yatzy1.smallStraight(1, 2, 2, 4, 5));
+
+    @ParameterizedTest
+    @MethodSource
+    public void smallStraight(DiceCombination combination, int expectedScore) {
+        assertEquals(expectedScore, new Yatzy1(combination).smallStraight());
+    }
+
+    public static Stream<Arguments> smallStraight() {
+        return Stream.of(
+                Arguments.of(new DiceCombination(1, 2, 3, 4, 5), 15),
+                Arguments.of(new DiceCombination(2, 3, 4, 5, 1), 15),
+                Arguments.of(new DiceCombination(1, 2, 2, 4, 5), 0)
+        );
     }
 
     @Test
     public void largeStraight() {
-        assertEquals(20, Yatzy1.largeStraight(6, 2, 3, 4, 5));
-        assertEquals(20, Yatzy1.largeStraight(2, 3, 4, 5, 6));
-        assertEquals(0, Yatzy1.largeStraight(1, 2, 2, 4, 5));
+        assertEquals(20, new Yatzy1(new DiceCombination(6, 2, 3, 4, 5)).largeStraight());
+        assertEquals(20, new Yatzy1(new DiceCombination(2, 3, 4, 5, 6)).largeStraight());
+        assertEquals(0, new Yatzy1(new DiceCombination(1, 2, 2, 4, 5)).largeStraight());
     }
 
     @Test
