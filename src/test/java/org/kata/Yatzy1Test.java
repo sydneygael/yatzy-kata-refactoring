@@ -192,11 +192,18 @@ public class Yatzy1Test {
         );
     }
 
-    @Test
-    public void largeStraight() {
-        assertEquals(20, new Yatzy1(new DiceCombination(6, 2, 3, 4, 5)).largeStraight());
-        assertEquals(20, new Yatzy1(new DiceCombination(2, 3, 4, 5, 6)).largeStraight());
-        assertEquals(0, new Yatzy1(new DiceCombination(1, 2, 2, 4, 5)).largeStraight());
+    @ParameterizedTest
+    @MethodSource
+    public void largeStraight(DiceCombination combination, int expectedScore) {
+        assertEquals(expectedScore, new Yatzy1(combination).largeStraight());
+    }
+
+    public static Stream<Arguments> largeStraight() {
+        return Stream.of(
+                Arguments.of(new DiceCombination(6, 2, 3, 4, 5), 20),
+                Arguments.of(new DiceCombination(2, 3, 4, 5, 6), 20),
+                Arguments.of(new DiceCombination(1, 2, 2, 4, 5), 0)
+        );
     }
 
     @Test
