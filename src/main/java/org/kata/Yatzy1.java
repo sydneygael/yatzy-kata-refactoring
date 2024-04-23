@@ -62,7 +62,7 @@ public class Yatzy1 {
     }
 
     public int threeOfAKind() {
-        return diceCombination.numberOfDiceGreaterThan(3)
+        return diceCombination.getNumberOfDiceGreaterThan(3)
                 .stream()
                 .findFirst()
                 .map(n -> n * 3)
@@ -70,7 +70,7 @@ public class Yatzy1 {
     }
 
     public int fourOfAKind() {
-        return diceCombination.numberOfDiceGreaterThan(4)
+        return diceCombination.getNumberOfDiceGreaterThan(4)
                 .stream()
                 .findFirst()
                 .map(n -> n * 4)

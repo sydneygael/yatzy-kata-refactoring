@@ -43,7 +43,7 @@ public record DiceCombination(int d1, int d2, int d3, int d4, int d5) {
         return counts().getOrDefault(dice, 0L).intValue();
     }
 
-    public List<Integer> numberOfDiceGreaterThan(int n) {
+    public List<Integer> getNumberOfDiceGreaterThan(int n) {
         return counts().entrySet().stream()
                 .filter(entry -> entry.getValue() >= n)
                 .map(Map.Entry::getKey)
@@ -52,7 +52,7 @@ public record DiceCombination(int d1, int d2, int d3, int d4, int d5) {
     }
 
     public List<Integer> findPairs() {
-        return numberOfDiceGreaterThan(2);
+        return getNumberOfDiceGreaterThan(2);
     }
 
     private Set<Integer> getDistinctValues() {
@@ -70,7 +70,7 @@ public record DiceCombination(int d1, int d2, int d3, int d4, int d5) {
     }
 
     public boolean isFullHouse() {
-        boolean hasThreeOfAKind = !numberOfDiceGreaterThan(3).isEmpty();
+        boolean hasThreeOfAKind = !getNumberOfDiceGreaterThan(3).isEmpty();
         boolean hasTwoOfAKind = !findPairs().isEmpty();
         boolean isNotYates = yatzy() == 0;
         return hasThreeOfAKind && hasTwoOfAKind && isNotYates;
