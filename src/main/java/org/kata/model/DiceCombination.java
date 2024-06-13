@@ -18,16 +18,13 @@ public record DiceCombination(int d1, int d2, int d3, int d4, int d5) {
     }
 
     public int sum() {
-        return d1 + d2 + d3 + d4 + d5;
+        return streamOfDices()
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 
     public int yatzy() {
-        return counts().values()
-                .stream()
-                .filter(d -> d == 5)
-                .findFirst()
-                .map(e -> 50)
-                .orElse(0);
+        return counts().containsValue(5L) ? 50 : 0;
     }
 
     private Map<Integer, Long> counts() {

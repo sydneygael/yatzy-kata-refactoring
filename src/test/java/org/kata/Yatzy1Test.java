@@ -12,12 +12,12 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-public class Yatzy1Test {
+class Yatzy1Test {
 
 
     @ParameterizedTest
     @MethodSource("shouldTestChanceProvider")
-    public void shouldTestChance(DiceCombination combination, int expectedScore) {
+    void shouldTestChance(DiceCombination combination, int expectedScore) {
         assertEquals(expectedScore, new Yatzy1(combination).chance());
     }
 
@@ -34,13 +34,13 @@ public class Yatzy1Test {
             "6, 6, 6, 6, 6, 50",
             "6, 6, 6, 6, 3, 0"
     })
-    public void yatzyShouldReturnExpectedScore(int d1, int d2, int d3, int d4, int d5, int expectedScore) {
+    void yatzyShouldReturnExpectedScore(int d1, int d2, int d3, int d4, int d5, int expectedScore) {
         assertEquals(expectedScore, new Yatzy1(new DiceCombination(d1, d2, d3, d4, d5)).yatzy());
     }
 
     @ParameterizedTest
     @MethodSource("onesProvider")
-    public void shouldTestOnes(DiceCombination combination, int expectedScore) {
+    void shouldTestOnes(DiceCombination combination, int expectedScore) {
         assertEquals(expectedScore, new Yatzy1(combination).ones());
     }
 
@@ -55,7 +55,7 @@ public class Yatzy1Test {
 
     @ParameterizedTest
     @MethodSource("shouldTestTwosProvider")
-    public void shouldTestTwos(DiceCombination combination, int expectedScore) {
+    void shouldTestTwos(DiceCombination combination, int expectedScore) {
         assertEquals(expectedScore, new Yatzy1(combination).twos());
     }
 
@@ -68,7 +68,7 @@ public class Yatzy1Test {
 
     @ParameterizedTest
     @MethodSource("shouldTestThreesProvider")
-    public void shouldTestThrees(DiceCombination combination, int expectedScore) {
+    void shouldTestThrees(DiceCombination combination, int expectedScore) {
         assertEquals(expectedScore, new Yatzy1(combination).threes());
     }
 
@@ -81,7 +81,7 @@ public class Yatzy1Test {
 
     @ParameterizedTest
     @MethodSource("shouldTestFoursProvider")
-    public void shouldTestFours(DiceCombination combination, int expectedScore) {
+    void shouldTestFours(DiceCombination combination, int expectedScore) {
         assertEquals(expectedScore, new Yatzy1(combination).fours());
     }
 
@@ -95,7 +95,7 @@ public class Yatzy1Test {
 
     @ParameterizedTest
     @MethodSource("shouldTestFivesProvider")
-    public void shouldTestFives(DiceCombination combination, int expectedScore) {
+    void shouldTestFives(DiceCombination combination, int expectedScore) {
         assertEquals(expectedScore, new Yatzy1(combination).fives());
     }
 
@@ -109,7 +109,7 @@ public class Yatzy1Test {
 
     @ParameterizedTest
     @MethodSource("shouldTestSixesProvider")
-    public void shouldTestSixes(DiceCombination combination, int expectedScore) {
+    void shouldTestSixes(DiceCombination combination, int expectedScore) {
         assertEquals(expectedScore, new Yatzy1(combination).sixes());
     }
 
@@ -123,7 +123,7 @@ public class Yatzy1Test {
 
     @ParameterizedTest
     @MethodSource("shouldTestOnePairProvider")
-    public void shouldTestOnePair(DiceCombination combination, int expectedScore) {
+    void shouldTestOnePair(DiceCombination combination, int expectedScore) {
         assertEquals(expectedScore, new Yatzy1(combination).pairs());
     }
 
@@ -137,8 +137,8 @@ public class Yatzy1Test {
 
     @ParameterizedTest
     @MethodSource
-    // pairs not paris :D
-    public void shouldTestTwoPairs(DiceCombination combination, int expectedScore) {
+        // pairs not paris :D
+    void shouldTestTwoPairs(DiceCombination combination, int expectedScore) {
         assertEquals(expectedScore, new Yatzy1(combination).twoPairs());
     }
 
@@ -151,7 +151,7 @@ public class Yatzy1Test {
 
     @ParameterizedTest
     @MethodSource
-    public void shouldTestThreeOfAKind(DiceCombination combination, int expectedScore) {
+    void shouldTestThreeOfAKind(DiceCombination combination, int expectedScore) {
         assertEquals(expectedScore, new Yatzy1(combination).threeOfAKind());
     }
 
@@ -166,7 +166,7 @@ public class Yatzy1Test {
 
     @ParameterizedTest
     @MethodSource
-    public void shouldTestFourOfAKind(DiceCombination combination, int expectedScore) {
+    void shouldTestFourOfAKind(DiceCombination combination, int expectedScore) {
         assertEquals(expectedScore, new Yatzy1(combination).fourOfAKind());
     }
 
@@ -179,7 +179,7 @@ public class Yatzy1Test {
 
     @ParameterizedTest
     @MethodSource
-    public void smallStraight(DiceCombination combination, int expectedScore) {
+    void smallStraight(DiceCombination combination, int expectedScore) {
         assertEquals(expectedScore, new Yatzy1(combination).smallStraight());
     }
 
@@ -193,7 +193,7 @@ public class Yatzy1Test {
 
     @ParameterizedTest
     @MethodSource
-    public void largeStraight(DiceCombination combination, int expectedScore) {
+    void largeStraight(DiceCombination combination, int expectedScore) {
         assertEquals(expectedScore, new Yatzy1(combination).largeStraight());
     }
 
@@ -207,7 +207,7 @@ public class Yatzy1Test {
 
     @ParameterizedTest
     @MethodSource
-    public void fullHouse(DiceCombination combination, int expectedScore) {
+    void fullHouse(DiceCombination combination, int expectedScore) {
         assertEquals(expectedScore, new Yatzy1(combination).fullHouse());
     }
 
